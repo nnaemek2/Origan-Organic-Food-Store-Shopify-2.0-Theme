@@ -1,0 +1,96 @@
+{% assign product_label_new = false %}
+{% capture _time %}{{settings.product_new_time | times:86400}}{% endcapture %} 
+{% assign time = _time|plus:0 %}
+{% assign now = 'now' | date: '%s'|plus:0 %}
+
+{% capture _value %}{{product.published_at | date: "%s" | plus : time }}{% endcapture %} 
+{% assign value = _value|plus:0 %}
+
+{% if now < value %}
+{% assign product_label_new = true %}
+{% endif %}
+
+{% assign on_sale = false %}
+{% if product.compare_at_price > product.price %}
+{% assign on_sale = true %}
+{% endif %}
+
+{% assign sold_out = true %}
+{% if product.available %}
+{% assign sold_out = false %}
+{% endif %}	
+<div class="product-item-v2 product-item">
+  <div class="product row align-items-center">
+    <div class="col-md-4 col-5 product-thumb">
+      <a href="{{ product.url | within: collection }}" class="thumb-link engoj_find_img relative d-block overflow-hidden">
+        <img style="width: 100%" src="{{ product.featured_image.src | img_url: 'master' }}" class="img-fluid" alt="{{ product.featured_image.alt | escape }}">
+        {% for image in product.images %}
+        {% if forloop.last %}
+        <img style="width: 100%" src="{{ image.src | product_img_url: 'master' }}" class="img-fluid absolute img-product-hover" alt="{{ product.featured_image.alt | escape }}">
+        {% endif %}
+        {% endfor %}
+      </a>
+    </div>
+    <div class="col-md-8 col-7">
+      <div class="info-product">
+        <h3 class="title-product d-flex">
+          <a href="{{product.url}}">{{product.title}} </a>
+        </h3>
+        <p class="price-product mb-0">
+          {% if on_sale %}<s class="price-old">{{ product.compare_at_price | money }}</s>{% endif %}
+          <span class="price">{{ product.price | money }}</span>
+        </p>
+        <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+      </div>
+    </div>
+
+    <div class="product-icon-action">
+
+      <div class="add-wishlist">
+        {% include 'add-wishlist' %} 
+      </div>
+
+      <div class="add-to-cart">
+        {% if sold_out %}
+        <a href="{{ product.url | within: collection }}" class="inline-block icon-addcart  box-shadow" data-toggle="tooltip" data-placement="top" data-original-title="{{settings.pia_sold_name}}">
+          {% if settings.pia_sold_svg != blank %}
+          {{settings.pia_sold_svg}}
+          {% else %}
+          <i class="{{settings.pia_sold}}"></i>
+          {% endif %}
+        </a>
+        {% else %}
+        {% if product.variants.size > 1 %}
+        <a href="{{ product.url | within: collection }}" class="inline-block icon-addcart  box-shadow" data-toggle="tooltip" data-placement="top" data-original-title="{{settings.pia_selectoption_name}}">
+          {% if settings.pia_selectoption_svg != blank %}
+          {{settings.pia_selectoption_svg}}
+          {% else %}
+          <i class="{{settings.pia_selectoption}}"></i>
+          {% endif %}
+        </a>
+        {% else %}
+        <form method="post" action="/cart/add" enctype="multipart/form-data" class="inline-block icon-addcart  box-shadow"  data-toggle="tooltip" data-placement="top" data-original-title="{{settings.pia_addcart_name}}">
+          <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+          <button type="submit" name="add" class="enj-add-to-cart-btn ">
+            {% if settings.pia_addcart_svg != blank %}
+            {{settings.pia_addcart_svg}}
+            {% else %}
+            <i class="{{settings.pia_addcart}}"></i>
+            {% endif %}
+          </button>
+        </form>
+        {% endif %}
+        {% endif %}
+      </div>
+      <div class="quick-view">
+        <a href="javascript:void(0)" class="engoj_btn_quickview icon-quickview inline-block box-shadow" data-id="{{ product.handle }}" data-toggle="tooltip" data-placement="top" data-original-title="{{settings.pia_quickview_name}}">
+          {% if settings.pia_quickview_svg != blank %}
+          {{settings.pia_quickview_svg}}
+          {% else %}
+          <i class="{{settings.pia_quickview}}"></i>
+          {% endif %}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

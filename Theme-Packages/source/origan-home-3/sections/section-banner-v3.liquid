@@ -1,0 +1,209 @@
+<div data-section-id="{{ section.id }}" data-section-type="section-banner-v3" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="section-banner-v3" {% if section.settings.ena_background_img %} {% if section.settings.bg_image != blank %} data-bg="{{section.settings.bg_image | image_url }}"  style=" background-size : cover ; background-attachment: fixed;" {% endif %} {% else %} style="background-color : {{section.settings.bg_color}}" {% endif %} >
+    <div class="container container-full"> 
+      <div class="row"> 
+        <div class="col-md-4 banner-text {% if section.settings.select_pos =='left' %} order-lg-1 {% elsif section.settings.select_pos == 'right'%} order-2  {% endif %}""> 
+          <div class="content-banner"> 
+            {% if section.settings.title_collection != blank %}
+            <h3 class="title" style="color: {{section.settings.color_title}}">{{section.settings.title_collection}}</h3>
+            {% endif %} 
+            {% if section.settings.title_sub != blank %}
+            <p class="sub-title" style="color: {{section.settings.color_sub_title}}">{{section.settings.title_sub}}</p>
+            {% endif %} 
+            {% if section.settings.button_1 != blank %}
+            <a href="{{section.settings.url_button1}}" class="button-shop button-shop-{{ section.id }} text-center">{{section.settings.button_1}}</a>
+            {% endif %} 
+          </div>
+        </div>
+        <div class="col-md-8 {% if section.settings.select_pos =='left' %} order-lg-2  {% elsif section.settings.select_pos == 'right'%} banner-right order-1 {% endif %}""> 
+          <div class=" js-banner-v3" >
+            {% if section.blocks.size > 0 %}
+            {% for block in section.blocks %}
+            {% if block.type == 'banner' %} 
+            <div class="col-12">
+              <div class="banner" > 
+                <a href="{{block.settings.brand_url}}">
+                  {% if block.settings.banner_img != blank %}
+                  <img loading="lazy" width="" height="" data-src="{{block.settings.banner_img | image_url }}" class="lazyload img-fluid w-100" alt="_img_collection">
+                  {% else %}
+                  <img loading="lazy" width="" height="" data-src="//via.placeholder.com/900x1200" class="lazyload img-fluid w-100" alt="_img_collection">
+                  {% endif %}
+                </a>
+              </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %} 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .section-banner-v3 .content-banner .button-shop-{{ section.id }} {
+    color: {{section.settings.color_btn}};
+    background: {{section.settings.bg_btn}};
+  }
+  .section-banner-v3 .content-banner .button-shop-{{ section.id }}:hover {
+    color: {{section.settings.color_btn_hover}};
+    background: {{section.settings.bg_btn_hover}};
+  }
+</style>
+
+{% schema %}
+{
+  "name": "BANNER V3",
+  "settings": [
+    {
+      "type": "select",
+      "id": "select_pos",
+      "label": "Select Position Content",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "checkbox",
+      "id": "ena_background_img",
+      "label": "Enable Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image Section"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#fff"
+    },
+    {
+      "type": "header",
+      "content": "Section Content"
+    },
+    {
+      "type": "text",
+      "id": "title_collection",
+      "label": "Title",
+      "default": "SILVER NECKLACE"
+    },
+    {
+      "type": "color",
+      "id": "color_title",
+      "label": "Color Title",
+      "default": "#000"
+    },
+	 {
+      "type": "text",
+      "id": "title_sub",
+      "label": "Sub Title",
+      "default": "Goods are well-glossed, non-rusting, non-allergenic, easy to lighten and maintain!"
+    },
+	{
+      "type": "color",
+      "id": "color_sub_title",
+      "label": "Color Sub Title",
+      "default": "#585757"
+    },
+    {
+      "type": "text",
+      "id": "button_1",
+      "label": "Button Label",
+      "default": "Shop now"
+    },
+	{
+      "type": "url",
+      "id": "url_button1",
+      "label": "URL button",
+      "default": "/collections/all"
+    },
+    {
+      "type": "color",
+      "id": "color_btn",
+      "label": "Color Button",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "bg_btn",
+      "label": "Background Button",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "color_btn_hover",
+      "label": "Color Button Hover",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "bg_btn_hover",
+      "label": "Background Button Hover",
+      "default": "#ff4545"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "banner",
+      "name": "Item Collection v1",
+      "settings": [
+        {
+          "type": "url",
+          "id": "brand_url",
+          "label": "URL collection",
+          "default": "/collections/all"
+        },
+        {
+          "type": "image_picker",
+          "id": "banner_img",
+          "info": "800 x 1000px recommended",
+          "label": "Image 1"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BANNER V3",
+      "category": "HOME",
+	  "blocks": [
+        {
+          "type": "banner",
+          "settings": {
+          }
+        },
+		 {
+          "type": "banner",
+          "settings": {
+          }
+        },	
+		 {
+          "type": "banner",
+          "settings": {
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

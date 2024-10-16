@@ -1,0 +1,212 @@
+<div data-section-id="{{ section.id }}" data-section-type="section-banner-v6" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="section-banner-v6 {% if section.settings.ena_margin_top %}  mt-all {% endif %}">
+    <div class="container container-v2">
+      <div class="row">
+        <div class="col-lg-3 col-md-6">
+          <div class="banner">
+            <div class="img-banner">
+              <a href="{{section.settings.url_button1}}">
+                {% if section.settings.img_banner1 != blank %}
+                <img loading="lazy" width="" height="" data-src="{{ section.settings.img_banner1 | image_url }}" class="lazyload img-fluid w-100" alt="_img_banner_">
+                {% else %}
+                <img loading="lazy" width="" height="" data-src="https://via.placeholder.com/600x900" class="lazyload img-fluid w-100" alt="_img_banner_">
+                {% endif %}
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="banner">
+            <div class="img-banner">
+              <a href="{{section.settings.url_button2}}">
+                {% if section.settings.img_banner2 != blank %}
+                <img loading="lazy" width="" height="" data-src="{{ section.settings.img_banner2 | image_url }}" class="lazyload img-fluid w-100" alt="_img_banner_">
+                {% else %}
+                <img loading="lazy" width="" height="" data-src="https://via.placeholder.com/600x900" class="lazyload img-fluid w-100" alt="_img_banner_">
+                {% endif %}
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-12 banner-section ">
+          <div class="banner">
+            <div class="img-banner">
+              <a href="{{section.settings.url_button3}}">
+                {% if section.settings.img_banner3 != blank %}
+                <img loading="lazy" width="" height="" data-src="{{ section.settings.img_banner3 | image_url }}" class="lazyload img-3 img-fluid w-100" alt="_img_banner_">
+                {% else %}
+                <img loading="lazy" width="" height="" data-src="https://via.placeholder.com/817x280" class="lazyload img-3 img-fluid w-100" alt="_img_banner_">
+                {% endif %}
+              </a>
+            </div>
+          </div>
+          <div class="banner banner4">
+            <div class="content-banner">
+              {% if section.settings.title_banner != blank %}
+              <h3 class="title" style="color: {{section.settings.color_title}}">{{section.settings.title_banner}}</h3>
+              {% endif %} 
+              {% if section.settings.button_4 != blank %}
+              <a href="{{section.settings.url_button4}}" class="button-shop button-shop-{{ section.id }} text-center">{{section.settings.button_4}}</a>
+              {% endif %} 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+.section-banner-v6 .banner-section .button-shop-{{ section.id }} {
+    color: {{section.settings.color_btn}};
+    background: {{section.settings.bg_btn}};
+}
+.section-banner-v6 .banner-section .button-shop-{{ section.id }}:hover {
+    color: {{section.settings.color_btn_hover}};
+    background: {{section.settings.bg_btn_hover}};
+}
+</style>
+{% schema %}
+{
+  "name": "BANNER V6",
+  "settings": [
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "checkbox",
+      "id": "ena_margin_top",
+      "label": "Enable Add Margin Top",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "header",
+      "content": "Banenr 1"
+    },
+	{
+      "type": "url",
+      "id": "url_button1",
+      "label": "URL button",
+      "default": "/collections/all"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_banner1",
+      "label": "Image Banner",
+      "info": "600 x 900px recommended"
+    },
+    {
+      "type": "header",
+      "content": "Banenr 2"
+    },
+	{
+      "type": "url",
+      "id": "url_button2",
+      "label": "URL button",
+      "default": "/collections/all"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_banner2",
+      "label": "Image Banner",
+      "info": "600 x 900px recommended"
+    },
+    {
+      "type": "header",
+      "content": "Banenr 3"
+    },
+	{
+      "type": "url",
+      "id": "url_button3",
+      "label": "URL button",
+      "default": "/collections/all"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_banner3",
+      "label": "Image Banner",
+      "info": "817 x 280px recommended"
+    },
+    {
+      "type": "header",
+      "content": "Banenr 4"
+    },
+	{
+      "type": "url",
+      "id": "url_button4",
+      "label": "URL button",
+      "default": "/collections/all"
+    },
+    {
+      "type": "text",
+      "id": "title_banner",
+      "label": "Title",
+      "default": "Coconut Oil Formula with Vitamin E"
+    },
+    {
+      "type": "text",
+      "id": "button_4",
+      "label": "Button Label",
+      "default": "Shop now"
+    },
+    {
+      "type": "header",
+      "content": "Button Color"
+    },
+    {
+      "type": "color",
+      "id": "color_title",
+      "label": "Color title",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "color_btn",
+      "label": "Color Button",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "bg_btn",
+      "label": "Background Color Button",
+      "default": "#b22222"
+    },
+    {
+      "type": "color",
+      "id": "color_btn_hover",
+      "label": "Color Button Hover",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "bg_btn_hover",
+      "label": "Background Color Button Hover",
+      "default": "#fff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "BANNER V6",
+      "category": "HOME"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,404 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+{% for block in section.blocks %}
+{% if block.type == "slideshow" %}
+  {% if block.settings.fonts_sub_1 !=blank %}
+  <link href="https://fonts.googleapis.com/css2?family={{block.settings.fonts_sub_1}}:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  {% endif %}
+  {% if block.settings.fonts_button !=blank %}
+  <link href="https://fonts.googleapis.com/css2?family={{block.settings.fonts_button}}:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  {% endif %}
+  {% if block.settings.fonts_title_top !=blank %}
+  <link href="https://fonts.googleapis.com/css2?family={{block.settings.fonts_title_top}}:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  {% endif %}
+{% endif %}
+{% endfor %}
+
+<div data-section-id="{{ section.id }}" data-section-type="section-slideshow-v5" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="section-slideshow-v5" style="background: {{section.settings.bg_section}}">
+    <div class="container container-v1">
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="js-slide-item5 p-0">
+            {% if section.blocks.size > 0 %} 
+            {% for block in section.blocks %}
+            {% if block.type == "slide" %}
+            <div class="slide-item">
+              <div class="slider-image">
+                {% if block.settings.img_slider != blank %}
+                <img src="{{block.settings.img_slider | img_url: "master"}}" alt="" class="lazyload img-fluid w-100">
+                {% else %}
+                <img src="//via.placeholder.com/939x589" alt="">
+                {% endif %}
+              </div>
+              <div class="slider-content">
+                {% if block.settings.slider_title != blank %}
+                <h3 class="slider-title title-{{block.id}}">{{block.settings.slider_title}}</h3>
+                {% endif %}
+                {% if block.settings.slider_sub_title != blank %}
+                <p class="mb-0 sub-title sub-title-{{block.id}}">{{block.settings.slider_sub_title}}</p>
+                {% endif %}
+                <div class="box-button">
+                  {% if block.settings.slider_button != blank %}
+                  <a href="{{block.settings.button_url}}" class="button-main2 button-shop-{{block.id}}" style="">{{block.settings.slider_button}}</a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="row">
+            <div class="col-12 col_12_slider">
+              <div class="slider-banner slider-banner1">
+                <div class="img-banner">
+                  {% if section.settings.img_banner1 != blank %}
+                  <img src="{{section.settings.img_banner1 | img_url: "master"}}" alt="" class="lazyload img-fluid w-100">
+                  {% else %}
+                  <img src="//via.placeholder.com/455x589" alt="">
+                  {% endif %}
+                </div>
+                <div class="info-banner">
+                  <div class="info">         
+                    {% if section.settings.subtitle_banner1 != blank %}
+                    <div class="sub_top_14" style="color: {{section.settings.color_sub}}">{{section.settings.subtitle_banner1}}</div>
+                    {% endif %} 
+                    {% if section.settings.title_banner1 != blank %}
+                    <h3 class="title" style="color: {{section.settings.color_title}}">{{section.settings.title_banner1}}</h3>
+                    {% endif %}  
+                    {% if section.settings.btn_banner1 != blank %}
+                    <a href="{{section.settings.url_banner1}}" class="button-main1 button-main1-{{ section.id }}">{{section.settings.btn_banner1}}</a>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  
+  {% for block in section.blocks %}
+  {% if block.type == 'slide' %}
+  .section-slideshow-v5 .slide-item.slick-active .slider-content .title-{{block.id}}{
+    color: {{block.settings.title_color}};
+    {% if block.settings.fonts_title_top != blank %}
+    font-family: '{{block.settings.fonts_title_top}}';
+      {% endif %}
+  }
+  
+  .section-slideshow-v5 .slide-item.slick-active .slider-content .sub-title-{{block.id}}{
+    color: {{block.settings.sub_title_color}};
+    {% if block.settings.fonts_sub_1 != blank %}
+    font-family: '{{block.settings.fonts_sub_1}}';
+      {% endif %}
+  }
+  
+  .section-slideshow-v5 .slide-item .slider-content .box-button .button-shop-{{block.id}} {
+  	color:{{block.settings.color_button}};
+    background:{{block.settings.bg_color_button}};
+    {% if block.settings.fonts_button != blank %}
+    font-family: '{{block.settings.fonts_button}}';
+      {% endif %}
+  }
+  .section-slideshow-v5 .slide-item .slider-content .box-button .button-shop-{{block.id}}:hover {
+    color: {{block.settings.color_button_hover}}!important;
+    background: {{block.settings.bg_color_button_hover}}!important;
+  }
+  
+  @media(min-width:1900px){
+    .section-slideshow-v5 .slide-item.slick-active .slider-content .title-{{block.id}}{
+      font-size:{{block.settings.font_size_title_top}}px;
+    }
+
+    .section-slideshow-v5 .slide-item.slick-active .slider-content .sub-title-{{block.id}}{
+      font-size:{{block.settings.font_size_top1}}px;
+    }
+
+    .section-slideshow-v5 .slide-item .slider-content .box-button .button-shop-{{block.id}} {
+      font-size:{{block.settings.font_size_button}}px;
+    }
+  }
+  
+  {% endif %}
+  {% endfor %}
+  .section-slideshow-v5 .slider-banner .info-banner .button-main1-{{ section.id }} {
+      color: {{section.settings.color_button}};
+      background:{{section.settings.color_bg}}; 
+  }
+  .section-slideshow-v5 .slider-banner .info-banner .button-main1-{{ section.id }}:hover {
+      color: {{section.settings.color_button_hover}};
+      background:{{section.settings.color_bg_hover}}; 
+  }
+</style>
+{% schema %}
+{
+  "name": "SLIDESHOW V5",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+	{
+      "type": "header",
+      "content": "Background Section"
+    },
+    {
+      "type": "color",
+      "id": "bg_section",
+      "label": "Bacground Section",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "header",
+      "content": "Slider Banner"
+    },
+    {
+      "type": "image_picker",
+      "id": "img_banner1",
+      "info": "455 x 589px recommended",
+      "label": "Banner Image"
+    },
+	{
+      "type": "text",
+      "id": "subtitle_banner1",
+      "label": "Sub Title",
+      "default": "up to 15% off"
+    },
+    {
+      "type": "color",
+      "id": "color_sub",
+      "label": "Color Sub",
+      "default": "#000"
+    },
+    {
+      "type": "text",
+      "id": "title_banner1",
+      "label": "Title",
+      "default": "The great <br> natural taste "
+    },
+    {
+      "type": "color",
+      "id": "color_title",
+      "label": "Color Title",
+      "default": "#000"
+    },
+    {
+      "type": "text",
+      "id": "btn_banner1",
+      "label": "Button Label",
+      "default": "SHop now"
+    },
+	{
+      "type": "url",
+      "id": "url_banner1",
+      "label": "URL",
+      "default": "/collections/all"
+    },
+    {
+      "type": "color",
+      "id": "color_button",
+      "label": "Color Button",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "color_bg",
+      "label": "Color background",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "color_button_hover",
+      "label": "Color Button Hover",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "color_bg_hover",
+      "label": "Color background Hover",
+      "default": "#000"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "SlideShow",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "img_slider",
+          "info": "939 x 589px recommended",
+          "label": "Slide Image"
+        },
+        {
+          "type": "header",
+          "content": "Heading Slideshow"
+        },
+        {
+          "type": "text",
+          "id": "slider_title",
+          "label": "Heading",
+          "default": "Smoothie delicious"
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "label": "Color",
+          "default": "#30343A"
+        },
+		{
+          "type": "range",
+          "id": "font_size_title_top",
+          "min": 40,
+          "max": 120,
+          "step": 1,
+          "unit": "px",
+          "label": "Font Size",
+          "default": 45
+        },
+		{
+          "type": "text",
+          "id": "fonts_title_top",
+          "label": "Fonts Family"
+        },
+        {
+          "type": "header",
+          "content": "Subheading Slideshow"
+        },
+        {
+          "type": "text",
+          "id": "slider_sub_title",
+          "label": "Subheading",
+          "default": "Packed in a facility that handles tree nuts <br>  and sesame seeds."
+        },
+        {
+          "type": "color",
+          "id": "sub_title_color",
+          "label": "Color",
+          "default": "#6D7178"
+        },
+		{
+          "type": "range",
+          "id": "font_size_top1",
+          "min": 15,
+          "max": 30,
+          "step": 1,
+          "unit": "px",
+          "label": "Font Size",
+          "default": 16
+        },
+		{
+          "type": "text",
+          "id": "fonts_sub_1",
+          "label": "Fonts Family"
+        },
+		{
+          "type": "header",
+          "content": "Button Slideshow"
+        },
+        {
+          "type": "text",
+          "id": "slider_button",
+          "label": "Button label",
+          "default": "Shop Now"
+        },
+        {
+          "type": "color",
+          "id": "color_button",
+          "label": "Color",
+          "default": "#4D822B"
+        },
+        {
+          "type": "color",
+          "id": "bg_color_button",
+          "label": "Background Color",
+          "default": "#fff"
+        },
+		{
+          "type": "range",
+          "id": "font_size_button",
+          "min": 14,
+          "max": 18,
+          "step": 1,
+          "unit": "px",
+          "label": "Font Size",
+          "default": 14
+        },
+		{
+          "type": "text",
+          "id": "fonts_button",
+          "label": "Fonts Family"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "URL Button ",
+          "default": "/collections/all"
+        },
+        {
+          "type": "header",
+          "content": "Button Hover"
+        },
+        {
+          "type": "color",
+          "id": "color_button_hover",
+          "label": "Color Button Hover",
+          "default": "#fff"
+        },
+        {
+          "type": "color",
+          "id": "bg_color_button_hover",
+          "label": "Bg Color Button Hover",
+          "default": "#4D822B"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SLIDESHOW V5",
+      "category": "HOME",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
