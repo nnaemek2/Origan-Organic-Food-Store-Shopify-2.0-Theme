@@ -1,0 +1,140 @@
+<div data-section-id="{{ section.id }}" data-section-type="section-info-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="section-info-v1 mt-all">
+    <div class="container container-v2">
+      <div class="row align-items-center">
+        <div class="col-12 col-lg-6">
+          <div class="content text-center">
+
+
+            {% if section.settings.subtitle_info != blank %}
+            <p class="sub-title" style="color: {{section.settings.color_subtitle_info}}">{{section.settings.subtitle_info }}</p>
+            {% endif %}
+
+            {% if section.settings.title_info != blank %}
+            <div class="title-info">
+              <h2 class="title_heading mb-0" style="color: {{section.settings.color_title_info}}">{{section.settings.title_info}}</h2>
+            </div>
+            {% endif %}
+
+            {% if section.settings.des_info != blank %}
+            <p class="des_info" style="color: {{section.settings.color_des_info}}">{{section.settings.des_info }}</p>
+            {% endif %}
+
+            <div class="button-about">
+              {% if section.settings.more_about != blank %}
+              <a style="color : {{section.settings.color_btn}}" class="button-main1" href="{{section.settings.url_banner}}">
+                {{section.settings.more_about}}
+              </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-6">
+          <div class="banner-img">
+            <img data-src="{% if section.settings.banner_img != blank %} {{section.settings.banner_img | img_url : 'master'}} {% else %}  //via.placeholder.com/570x480 {% endif %}" class="lazyload img-fluid w-100" alt="_img_banner_">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "INFO V1",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Info Left"
+    },
+	{
+      "type": "text",
+      "id": "subtitle_info",
+      "label": "Sub Title info",
+      "default": "INTRODUCTION"
+    },
+	{
+      "type": "color",
+      "id": "color_subtitle_info",
+      "label": "Color Sub Title info"
+    },
+	{
+      "type": "text",
+      "id": "title_info",
+      "label": "Title info",
+      "default": "Product Overview"
+    },
+	{
+      "type": "color",
+      "id": "color_title_info",
+      "label": "Color Title info"
+    },
+	{
+      "type": "textarea",
+      "id": "des_info",
+      "label": "Description info",
+      "default": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Mauris fermentum dictum magna. Sed laoreet aliquam leo. Ut tellus dolor, dapibus eget, elementum vel, cursus eleifend, elit. Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Integer rutrum ante eu lacus."
+    },
+	{
+      "type": "color",
+      "id": "color_des_info",
+      "label": "Color Description info"
+    },
+	{
+      "type": "text",
+      "id": "more_about",
+      "label": "button",
+      "default": "Find Our More"
+    },
+	{
+      "type": "color",
+      "id": "color_btn",
+      "label": "Color Button"
+    },
+	{
+      "type": "url",
+      "id": "url_banner",
+      "label": "URL button",
+      "default": "/collections/all"
+    },
+    {
+      "type": "header",
+      "content": "Info Right"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_img",
+      "label": "Image",
+      "info": "800 x 800px recommended"
+    },
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  "presets": [
+    {
+      "name": "INFO V1",
+      "category": "HOME"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

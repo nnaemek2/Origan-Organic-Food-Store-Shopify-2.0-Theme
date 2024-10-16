@@ -1,0 +1,241 @@
+<div data-section-id="{{ section.id }}" data-section-type="section-newsletter-instagram-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="section-testimonial-instagram-v1">
+    <div class="container container-v2">
+      <div class="row row-banner-{{ section.id }} align-items-center">
+        <div class="col-12 col-md-6 col-ns-ins">
+          <div class="block-testimonial">
+            <div class="text-center">
+              {% if section.settings.section_title != blank %}
+              <h3 class="title_heading mb-0" style="color:{{section.settings.color_title2}}">{{section.settings.section_title}}</h3>
+              {% endif %}
+            </div>
+            <div class="js-testimonial-instagram">
+              {% if section.blocks.size > 0 %}
+              {% for block in section.blocks %}
+              {% if block.type == "testimonial" %}
+              <div class="testimonial-inner">
+                <h2><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.725c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275zm-13 0c0-5.141 3.892-10.519 10-11.725l.984 2.126c-2.215.835-4.163 3.742-4.38 5.746 2.491.392 4.396 2.547 4.396 5.149 0 3.182-2.584 4.979-5.199 4.979-3.015 0-5.801-2.305-5.801-6.275z"/></svg></h2>
+                <div class="testimonial-info">
+                  <p class="text" style="color: {{block.settings.color_content}}">{{block.settings.block_content}}</p> 
+                  <span class="engoc-star star-5"></span>
+                </div>
+                <div class="testimonial-author">
+                  <div class="avatar ">
+                    {% if block.settings.block_img != blank %}
+                    <img width="88" height="88" data-src="{{block.settings.block_img|img_url:'master'}}" class="lazyload img-responsive" alt="testimonial">
+                    {% else %}
+                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                    {% endif %}
+                  </div>
+                  <div class="author-info">
+                    <h3 class="mb-1" style="color: {{block.settings.color_name}}">{{block.settings.block_name}}</h3>
+                    <p class="text-position mb-0" style="color: {{block.settings.color_des}}">{{block.settings.block_des}}</p>
+                  </div>
+                </div>
+              </div>
+              
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 col-ns-ins">
+          <div class="instagram-ns">
+            <div class="box-all-item">
+              {% assign instafeed_img = '{{image}}' %}
+              {% assign instafeed_link = '{{link}}' %}
+              
+              {% if section.settings.ins_userid != blank and section.settings.ins_access_token != blank %}
+              <script>
+                jQuery(document).ready(function($) {
+                  var feed = new Instafeed({
+                    get: 'user',
+                    userId: '{{section.settings.ins_userid}}',
+                    accessToken: '{{section.settings.ins_access_token}}',
+                    template: '<div class="instagram-item col-md-4 py-md-3 py-2 "> <div class="content"> <img src="{{ 'instagram' | append: i | append: '.jpg' | file_img_url: 'master' }}" class="img-responsive" alt="instagram" /> <div class="absolute content_text flex center"> <a href="{{instafeed_link}}" class="delay03 inline-block" target="_blank"><i class="{{section.settings.item_icon}}"></i></a> </div> </div> </div>',
+                    target: 'engoj_instagram_ns',
+                    resolution: 'standard_resolution',
+                    limit: {{section.settings.ins_limit_number}}
+                  });
+                  feed.run();
+                });
+              </script>
+              {% endif %}
+              
+              <div class="box-intargram">
+                <div class="">
+                  <div class=" row no-gutters justify-content-center" id="engoj_instagram_ns">
+                    
+                    {% if section.settings.ins_userid == blank or section.settings.ins_access_token == blank %}
+                    {% if shop.permanent_domain == "origan-store-demo.myshopify.com" %}
+                    {% for i in (1..section.settings.ins_limit_number) %}
+                    <div class="col-md-6 col-12">
+                      <div class="box-img">
+                        <div class="picture text-center">
+                          <a href="https://www.instagram.com/">
+                            <img class="w-100" src="{{ 'instagram' | append: i | append: '.jpg' | file_img_url: 'master' }}" alt="instagram" />
+                          </a>
+                        </div>
+                        <div class="content-intagram text-center">
+                          <a href="https://www.instagram.com/" class="fa fa-instagram"></a>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <div class="col-md-6 col-12">
+                      <div class="box-img">
+                        <div class="picture">
+                          <a href="https://www.instagram.com/">
+                            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                          </a>
+                        </div>
+                        <div class="content-intagram text-center">
+                          <a href="https://www.instagram.com/" class="fa fa-instagram"></a>
+                        </div>
+                      </div>
+                    </div>
+                    {% endif %}
+                    {% endif %}
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .section-newsletter-instagram-v1 .row-banner-{{ section.id }} {
+    margin-left: -7.5px;
+    margin-right: -7.5px;
+  }
+  .section-newsletter-instagram-v1 .row .col-ns-ins {
+    padding: 0 7.5px;
+  }
+</style>
+{% schema %}
+{
+  "name": "TESTIMONIAL INSTAGRAM V1",
+  "settings": [
+	{
+      "type": "header",
+      "content": "Info Intagram"
+    },
+    {
+      "type": "text",
+      "id": "ins_userid",
+      "label": "User ID Instagram",
+      "default": "3672948962"
+    },
+    {
+      "type": "text",
+      "id": "ins_access_token",
+      "label": "Access Token Instagram",
+      "default": "3672948962.0f64772.430edb7f711e4665b59777c54d1ed9ce"
+    },
+    {
+      "type": "text",
+      "id": "ins_limit_number",
+      "label": "Limit Image",
+      "default": "4"
+    },
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "block_content",
+          "label": "Content",
+          "default": "Saved our business! We have no regrets! Thanks for the great service. Ovani is worth much more than I paid Saved our business! We have no regrets! Thanks for the great service. Ovani is worth much more!"
+        },
+        {
+          "type": "color",
+          "id": "color_content",
+          "label": "Color",
+          "default": "#666"
+        },
+        {
+          "type": "image_picker",
+          "id": "block_img",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "block_name",
+          "label": "Content",
+          "default": "DESTINEE"
+        },
+        {
+          "type": "color",
+          "id": "color_name",
+          "label": "Color Name"
+        },
+        {
+          "type": "text",
+          "id": "block_des",
+          "label": "Info",
+          "default": "Marketing Personal"
+        },
+        {
+          "type": "color",
+          "id": "color_des",
+          "label": "Color Des"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TESTIMONIAL INSTAGRAM V1",
+      "category": "HOME",
+	  "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+
+{% javascript %}
+{% endjavascript %}

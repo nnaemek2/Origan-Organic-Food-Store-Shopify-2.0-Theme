@@ -1,0 +1,313 @@
+<div data-section-id="{{ section.id }}" data-section-type="section-banner-v11" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="section-banner-v11 mt-all" > 
+    <div class="container container-full {% if section.settings.ena_container %} container container-v2 {% endif %} " >
+      <div class="row"> 
+        <div class="col-lg-4 ">
+          <div class="banner">
+            <div class="box-image"> 
+              {% if section.settings.img_banner1 != blank %}
+              <img loading="lazy" width="" height="" data-src="{{ section.settings.img_banner1 | image_url }}" class="lazyload img-fluid w-100" alt="_img_banner_"> 
+              {% else %} 
+              <img loading="lazy" width="" height="" data-src="https://via.placeholder.com/471x414" class="lazyload img-fluid w-100" alt="_img_banner_">
+              {% endif %}
+            </div>
+            <div class="content-banner"> 
+                {% if section.settings.title_heading1 != blank %}
+                <p class="title-heading" style="color: {{section.settings.color_heading1}}" >{{section.settings.title_heading1}}</p>
+                {% endif %} 
+                {% if section.settings.title_banner1 != blank %}
+                <h3 class="title-banner " style="color: {{section.settings.color_title1}}" >{{section.settings.title_banner1}}</h3>
+                {% endif %}
+                {% if section.settings.button_banner1 != blank %}
+                <a href="{{section.settings.url_banner1}}" class="button button2-{{ section.id }}" title="">{{section.settings.button_banner1}}</a>
+                {% endif %}
+            </div> 
+          </div>  
+        </div> 
+        <div class="col-lg-4 "> 
+          <div class="banner-text">
+            <div class="box-image"> 
+              {% if section.settings.img_banner2 != blank %}
+              <img loading="lazy" width="" height="" data-src="{{ section.settings.img_banner2 | image_url }}" class="lazyload img-fluid w-100" alt="_img_banner_"> 
+              {% else %} 
+              <img loading="lazy" width="" height="" data-src="https://via.placeholder.com/471x414" class="lazyload img-fluid w-100" alt="_img_banner_">
+              {% endif %}
+            </div>
+            <div class="content-banner"> 
+                {% if section.settings.title_heading2 != blank %}
+                <p class="title-heading" style="color: {{section.settings.color_heading2}}" >{{section.settings.title_heading2}}</p>
+                {% endif %} 
+                {% if section.settings.title_banner2 != blank %}
+                <h3 class="title-banner " style="color: {{section.settings.color_title2}}" >{{section.settings.title_banner2}}</h3>
+                {% endif %}
+                {% if section.settings.button_banner2 != blank %}
+                <a href="{{section.settings.url_banner2}}" class="button button-{{ section.id }}" title="">{{section.settings.button_banner2}}</a>
+                {% endif %}
+            </div> 
+          </div>
+        </div>
+        <div class="col-lg-4 ">
+          <div class="banner banner2">
+            <div class="box-image">
+              {% if section.settings.img_banner3 != blank %}
+              <img loading="lazy" width="" height="" data-src="{{ section.settings.img_banner3 | image_url }}" class="lazyload img-fluid w-100" alt="_img_banner_">
+              {% else %}
+              <img loading="lazy" width="" height="" data-src="https://via.placeholder.com/471x414" class="lazyload img-fluid w-100" alt="_img_banner_">
+              {% endif %}
+            </div>
+            <div class="content-banner"> 
+                {% if section.settings.title_heading3 != blank %}
+                <p class="title-heading" style="color: {{section.settings.color_heading3}}" >{{section.settings.title_heading3}}</p>
+                {% endif %} 
+                {% if section.settings.title_banner3 != blank %}
+                <h3 class="title-banner " style="color: {{section.settings.color_title3}}" >{{section.settings.title_banner3}}</h3>
+                {% endif %}
+                {% if section.settings.button_banner3 != blank %}
+                <a href="{{section.settings.url_banner3}}" class="button button2-{{ section.id }}" title="">{{section.settings.button_banner3}}</a>
+                {% endif %}
+            </div> 
+          </div>
+        </div>
+      </div>  
+    </div>
+  </div>
+</div>
+<style>
+  .section-banner-v11 .banner-text .content-banner .button-{{ section.id }} {
+    color: {{section.settings.color_button}};
+  }
+  .section-banner-v11 .banner-text .content-banner .button-{{ section.id }}:before {
+    border-color: {{section.settings.color_button}};
+  }
+  .section-banner-v11 .banner-text .content-banner .button-{{ section.id }}:hover {
+    color: {{section.settings.color_button_hover}};
+  }
+  .section-banner-v11 .banner-text .content-banner .button-{{ section.id }}:hover:before {
+    border-color: {{section.settings.color_button_hover}};
+  }
+  
+  .section-banner-v11 .banner .content-banner .button2-{{ section.id }} {
+    color: {{section.settings.color_button2}};
+  }
+  .section-banner-v11 .banner .content-banner .button2-{{ section.id }}:before {
+    border-color: {{section.settings.color_button2}};
+  }
+  .section-banner-v11 .banner .content-banner .button2-{{ section.id }}:hover {
+    color: {{section.settings.color_button_hover2}};
+  }
+  .section-banner-v11 .banner .content-banner .button2-{{ section.id }}:hover:before {
+    border-color: {{section.settings.color_button_hover2}};
+  }
+</style>
+
+{% schema %}
+{
+  "name": "BANNER V11",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "ena_container",
+      "label": "Enable Container",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "header",
+      "content": "Settings Banner 1"
+    },
+	{
+      "type": "image_picker",
+      "id": "img_banner1",
+      "label": " Image 1",
+      "info": "441x440px recommended"
+    },
+    {
+      "type": "text",
+      "id": "title_heading1",
+      "label": "Content Heading 1",
+      "default": "Store Coffee"
+    },
+    {
+      "type": "color",
+      "id": "color_heading1",
+      "label": "Color Heading 1",
+      "default": "#a6674a"
+    },
+    {
+      "type": "text",
+      "id": "title_banner1",
+      "label": "Title Banner 1",
+      "default": "Green World"
+    },
+    {
+      "type": "color",
+      "id": "color_title1",
+      "label": "Color Title",
+      "default": "#000"
+    },
+    {
+      "type": "text",
+      "id": "button_banner1",
+      "label": "Button Banner 2",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "url_banner1",
+      "label": "URL Banner ",
+      "default": "/collections/all"
+    },
+    {
+      "type": "header",
+      "content": "Settings Banner 2"
+    },
+	{
+      "type": "image_picker",
+      "id": "img_banner2",
+      "label": " Image 2",
+      "info": "441x440px recommended"
+    },
+    {
+      "type": "text",
+      "id": "title_heading2",
+      "label": "Content Heading 2",
+      "default": "Store Coffee"
+    },
+    {
+      "type": "color",
+      "id": "color_heading2",
+      "label": "Color Heading 2",
+      "default": "#a6674a"
+    },
+    {
+      "type": "text",
+      "id": "title_banner2",
+      "label": "Title Banner 2",
+      "default": "Green World"
+    },
+    {
+      "type": "color",
+      "id": "color_title2",
+      "label": "Color Title",
+      "default": "#000"
+    },
+    {
+      "type": "text",
+      "id": "button_banner2",
+      "label": "Button Banner 2",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "url_banner2",
+      "label": "URL Banner ",
+      "default": "/collections/all"
+    },
+    {
+      "type": "header",
+      "content": "Settings color "
+    },
+    {
+      "type": "color",
+      "id": "color_button",
+      "label": "Color Button",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "color_button_hover",
+      "label": "Color Button Hover",
+      "default": "#000"
+    },
+    {
+      "type": "header",
+      "content": "Settings Banner 3"
+    },
+	{
+      "type": "image_picker",
+      "id": "img_banner3",
+      "label": " Image 3",
+      "info": "920x440px recommended"
+    },
+    {
+      "type": "text",
+      "id": "title_heading3",
+      "label": "Content Heading 3",
+      "default": "Store Coffee"
+    },
+    {
+      "type": "color",
+      "id": "color_heading3",
+      "label": "Color Heading 3",
+      "default": "#a6674a"
+    },
+    {
+      "type": "text",
+      "id": "title_banner3",
+      "label": "Title Banner 3",
+      "default": "Green World"
+    },
+    {
+      "type": "color",
+      "id": "color_title3",
+      "label": "Color Title",
+      "default": "#000"
+    },
+    {
+      "type": "text",
+      "id": "button_banner3",
+      "label": "Button Banner 3",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "url_banner3",
+      "label": "URL Banner ",
+      "default": "/collections/all"
+    },
+    {
+      "type": "header",
+      "content": "Settings color 2"
+    },
+    {
+      "type": "color",
+      "id": "color_button2",
+      "label": "Color Button",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "color_button_hover2",
+      "label": "Color Button Hover",
+      "default": "#000"
+    }
+  ],
+  "presets": [
+    {
+      "name": "BANNER V11",
+      "category": "HOME"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

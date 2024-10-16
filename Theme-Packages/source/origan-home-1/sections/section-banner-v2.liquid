@@ -1,0 +1,201 @@
+<div data-section-id="{{ section.id }}" data-section-type="section-banner-v2" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="section-banner-v2" style="background: {{section.settings.bg_section}}" >
+    <div class="container container-v2"> 
+      <div class="elementor-heading text-center">
+        {% if section.settings.sub_heading != blank %}
+        <p class="sub-heading" style="color: {{section.settings.color_sub_heading}}">{{section.settings.sub_heading}}</p>
+        {% endif %} 
+        {% if section.settings.title_heading != blank %}
+        <h3 class="heading-title" style="color: {{section.settings.color_heading}}">{{section.settings.title_heading}}</h3>
+        {% endif %} 
+      </div>
+      
+      <div class="row js-banner-v2">    
+        {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+        {% if block.type == 'banner' %} 
+        <div class="col-12 "> 
+          <div class="banner">
+            <a href="{{block.settings.url_banner}}" class="box-img d-block position-relative">
+              {% if block.settings.img_banner != blank %}
+              <img data-src="{{block.settings.img_banner | img_url: 'master'}}" class="lazyload img-fluid w-100" alt="_img">
+              {% else %}
+              <img data-src="//via.placeholder.com/600x600" class="lazyload img-fluid w-100" alt="_img">
+              {% endif %}
+            </a>
+            <div class="content-banner">
+              {% if block.settings.title_banner != blank %}
+              <a href="{{block.settings.url_banner}}" class="title-banner title-banner-{{ block.id }}">{{block.settings.title_banner}}</a>
+              {% endif %}
+            </div>
+          </div>
+        </div> 
+        {% endif %}
+        {% endfor %}
+        {% endif %} 
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  
+{% if section.blocks.size > 0 %}
+{% for block in section.blocks %}
+{% if block.type == 'banner' %} 
+  .section-banner-v2 .content-banner .title-banner-{{ block.id }} {
+      color: {{block.settings.color_title}};
+    }
+    .section-banner-v2 .content-banner .title-banner-{{ block.id }}:hover {
+      color: {{block.settings.color_title_hover}};
+    }
+
+{% endif %}
+{% endfor %}
+{% endif %} 
+</style>
+  
+{% schema %}
+{
+  "name": "BANNER V2",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },{
+      "type": "color",
+      "id": "bg_section",
+      "label": "Bacground Section",
+      "default": "#f8f6f4"
+    },
+    {
+      "type": "header",
+      "content": "Settings Banner Heading"
+    },
+    {
+      "type": "text",
+      "id": "title_heading",
+      "label": "Title Heading",
+      "default": "Jewellery Collections"
+    },
+    {
+      "type": "color",
+      "id": "color_heading",
+      "label": "Color Heading",
+      "default": "#000"
+    },
+    {
+      "type": "text",
+      "id": "sub_heading",
+      "label": "Title Sub Heading",
+      "default": "GET READY TO SPARKLE"
+    },
+    {
+      "type": "color",
+      "id": "color_sub_heading",
+      "label": "Color Sub Heading",
+      "default": "#CB8161"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "banner",
+      "name": "Banner Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "img_banner",
+          "info": "420 x 400px recommended",
+          "label": "Image  Banner"
+        },
+        {
+          "type": "text",
+          "id": "title_banner",
+          "label": "Title Banner",
+          "default": "Travel bags"
+        },
+        {
+          "type": "color",
+          "id": "color_title",
+          "label": "Color Title",
+          "default": "#000"
+        },
+        {
+          "type": "color",
+          "id": "color_title_hover",
+          "label": "Color Title Hover",
+          "default": "#fff"
+        },
+        {
+          "type": "url",
+          "id": "url_banner",
+          "label": "URL Banner",
+          "default": "/collections/all"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "BANNER V2",
+      "category": "HOME",
+      "blocks": [
+        {
+          "type": "banner",
+          "settings": {
+            "title_banner": "Travel bags"
+          }
+        },
+        {
+          "type": "banner",
+          "settings": {
+            "title_banner": "Travel bags"
+          }
+        },
+        {
+          "type": "banner",
+          "settings": {
+            "title_banner": "Travel bags"
+          }
+        },
+        {
+          "type": "banner",
+          "settings": {
+            "title_banner": "Backpacks"
+          }
+        },
+        {
+          "type": "banner",
+          "settings": {
+            "title_banner": "Duffel bags"
+          }
+        },
+        {
+          "type": "banner",
+          "settings": {
+            "title_banner": "Crossbody bags"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

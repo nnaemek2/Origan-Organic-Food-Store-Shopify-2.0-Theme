@@ -1,0 +1,209 @@
+<div data-section-id="{{ section.id }}" data-section-type="section-newsletter-instagram-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  {% if settings.newsletter_form_action != blank %}
+  {% assign form_action = settings.newsletter_form_action %}
+  {% else %}
+  {% assign form_action = '#' %}
+  {% endif %}
+  <div class="section-newsletter-instagram-v1">
+    <div class="container container-v2">
+      <div class="row row-banner-{{ section.id }} align-items-center">
+        <div class="col-12 col-md-6 col-ns-ins">
+          <div class="content-newsletter align-items-center">
+            <div class="info-newsletter">
+
+              {% if section.settings.icon1 != blank %}
+              <div class="icon">
+                <i class="{{section.settings.icon1}}"></i>
+              </div>
+              {% endif %}
+
+              {% if section.settings.title_newletter != blank %}
+              <h3 class="title-newsletter">{{section.settings.title_newletter}}</h3>
+              {% endif %}
+              {% if section.settings.description != blank %}
+              <p class="desc">
+                {{section.settings.description}}
+              </p>
+              {% endif %}
+
+            </div>
+            <div class="newletter_email">          
+              <form class="newsletter-form-wrap form-inline" action="{{form_action}}" method="post">
+                <input type="email" name="EMAIL" class="form-control" placeholder="{{ 'general.newsletter_form.newsletter_emai_2' | t }}" required >   
+                <button class="btn submit-newsletter" type="submit">{{ 'general.newsletter_form.submit_footer' | t }}</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 col-ns-ins">
+          <div class="instagram-ns">
+            <div class="box-all-item">
+              {% assign instafeed_img = '{{image}}' %}
+              {% assign instafeed_link = '{{link}}' %}
+
+              {% if section.settings.ins_userid != blank and section.settings.ins_access_token != blank %}
+              <script>
+                jQuery(document).ready(function($) {
+                  var feed = new Instafeed({
+                    get: 'user',
+                    userId: '{{section.settings.ins_userid}}',
+                    accessToken: '{{section.settings.ins_access_token}}',
+                    template: '<div class="instagram-item col-md-4 py-md-3 py-2 "> <div class="content"> <img src="{{ 'instagram' | append: i | append: '.jpg' | file_img_url: 'master' }}" class="img-responsive" alt="instagram" /> <div class="absolute content_text flex center"> <a href="{{instafeed_link}}" class="delay03 inline-block" target="_blank"><i class="{{section.settings.item_icon}}"></i></a> </div> </div> </div>',
+                    target: 'engoj_instagram_ns',
+                    resolution: 'standard_resolution',
+                    limit: {{section.settings.ins_limit_number}}
+                  });
+                  feed.run();
+                });
+              </script>
+              {% endif %}
+
+              <div class="box-intargram">
+                <div class="">
+                  <div class=" row no-gutters justify-content-center" id="engoj_instagram_ns">
+
+                    {% if section.settings.ins_userid == blank or section.settings.ins_access_token == blank %}
+                    {% if shop.permanent_domain == "origan-store-demo.myshopify.com" %}
+                    {% for i in (1..section.settings.ins_limit_number) %}
+                    <div class="col-md-6 col-12">
+                      <div class="box-img">
+                        <div class="picture text-center">
+                          <a href="https://www.instagram.com/">
+                            <img class="w-100" src="{{ 'instagram' | append: i | append: '.jpg' | file_img_url: 'master' }}" alt="instagram" />
+                          </a>
+                        </div>
+                        <div class="content-intagram text-center">
+                          <a href="https://www.instagram.com/" class="fa fa-instagram"></a>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <div class="col-md-6 col-12">
+                      <div class="box-img">
+                        <div class="picture">
+                          <a href="https://www.instagram.com/">
+                            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                          </a>
+                        </div>
+                        <div class="content-intagram text-center">
+                          <a href="https://www.instagram.com/" class="fa fa-instagram"></a>
+                        </div>
+                      </div>
+                    </div>
+                    {% endif %}
+                    {% endif %}
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .section-newsletter-instagram-v1 .row-banner-{{ section.id }} {
+    margin-left: -7.5px;
+    margin-right: -7.5px;
+  }
+  .section-newsletter-instagram-v1 .row .col-ns-ins {
+    padding: 0 7.5px;
+  }
+</style>
+{% schema %}
+{
+  "name": "NEWSLETTER INSTAGRAM V1",
+  "settings": [
+	{
+      "type": "header",
+      "info": "MailChimp form action URL: Setting in Login Store > Customize theme > Theme settings tab > Mailchimp",
+      "content": "Newsletter"
+    },
+	{
+      "type": "header",
+      "content": "Info newsletter"
+    },
+	{
+      "type": "text",
+      "id": "icon1",
+      "label": "Icon",
+      "default": "fa fa-envelope-open-o",
+      "info": "[Get icon in here](https:\/\/fontawesome.com\/v4.7.0\/icons)"
+    },
+    {
+      "type": "text",
+      "id": "title_newletter",
+      "label": "Title Newletter",
+      "default": "Newsletter Signup"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description",
+      "default": "Join our list and get 15% off your first purchase!"
+    },
+	{
+      "type": "text",
+      "id": "icon_button",
+      "label": "Icon Button ",
+      "default": "fa fa-paper-plane",
+      "info": "[Get icon in here](https:\/\/fontawesome.com\/v4.7.0\/icons)"
+    },
+	{
+      "type": "header",
+      "content": "Info Intagram"
+    },
+    {
+      "type": "text",
+      "id": "ins_userid",
+      "label": "User ID Instagram",
+      "default": "3672948962"
+    },
+    {
+      "type": "text",
+      "id": "ins_access_token",
+      "label": "Access Token Instagram",
+      "default": "3672948962.0f64772.430edb7f711e4665b59777c54d1ed9ce"
+    },
+    {
+      "type": "text",
+      "id": "ins_limit_number",
+      "label": "Limit Image",
+      "default": "4"
+    },
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  "presets": [
+    {
+      "name": "NEWSLETTER INSTAGRAM V1",
+      "category": "HOME"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

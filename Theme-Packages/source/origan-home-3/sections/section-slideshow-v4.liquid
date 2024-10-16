@@ -1,0 +1,171 @@
+<div data-section-id="{{ section.id }}" data-section-type="section-slideshow-v4" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %} {% if section.settings.sections_layout == "dark" %}background: {{section.settings.sections_bg_color}};{% endif %}">
+  <div class="section-slideshow-v4">
+    <div class="slick-side-h4 js-slideshow-v4">       
+      {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+      {% if block.type == "slideshow" %}
+      <div class="itemv-slide-h5">
+        <div class="info-slideh5">
+          <div class="picture-slideshow d-none d-md-block">
+            {% if block.settings.block_banerimage != blank %}
+            <a href="{{block.settings.block_url}}">
+              <img data-src="{{block.settings.block_banerimage | img_url: 'master'}}" class="lazyload img_desktop img-fluid" alt="slideshow">
+            </a>
+            {% else %}
+            <a href="{{block.settings.block_url}}">
+              <img data-src="//via.placeholder.com/1240x800" class="lazyload img-fluid img_desktop" alt="slideshow">
+            </a>
+            {% endif %}
+          </div> 
+          <div class="picture-slideshow d-block d-md-none">
+            {% if block.settings.block_banerimage_mb != blank %}
+            <a href="{{block.settings.block_url}}">
+              <img data-src="{{block.settings.block_banerimage_mb | img_url: 'master'}}" class="lazyload img-fluid" alt="slideshow">
+            </a>
+            {% else %}
+            <a href="{{block.settings.block_url}}">
+              <img data-src="{{block.settings.block_banerimage | img_url: 'master'}}" class="lazyload img-fluid img_desktop" alt="slideshow">
+            </a>
+            {% endif %}
+          </div>
+          <div class="box-content">
+            {% if block.settings.sub_title and block.settings.title_slide != blank %}
+            <div class="box-info box-info-{{block.id}}">
+              <div class="box-title2">
+                {% if block.settings.sub_title != blank %}
+                <h4 class="mb-0" style="color:{{block.settings.color_sub_title}};">
+                  {{ block.settings.sub_title }}
+                </h4>
+                {% endif %}
+              </div>
+              <div class="box-title">
+                {% if block.settings.title_slide != blank %}
+                <h3 class="mb-0">
+                  <a href="{{block.settings.block_url}}" style="color:{{block.settings.color_title_slide}}" class="d-block">
+                    {{ block.settings.title_slide }}
+                  </a>
+                </h3>
+                {% endif %} 
+              </div>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "SLIDESHOW V4",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slideshow",
+      "name": "slideshow",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "block_banerimage",
+          "label": "Image slideshow",
+          "info": "1240 x 800px recommended"
+        },
+        {
+          "type": "image_picker",
+          "id": "block_banerimage_mb",
+          "label": "Image On Mobile",
+          "info": " 500 x 600px recommended"
+        },
+        {
+          "type": "text",
+          "id": "sub_title",
+          "label": "Sub Title",
+          "default": "TRENDING COLLECTION"
+        },
+        {
+          "type": "color",
+          "id": "color_sub_title",
+          "label": "Color",
+          "default": "#fff"
+        },
+        {
+          "type": "text",
+          "id": "title_slide",
+          "label": "Title Slide",
+          "default": "Side Table Decor"
+        },
+        {
+          "type": "color",
+          "id": "color_title_slide",
+          "label": "Color",
+          "default": "#fff"
+        },
+        {
+          "type": "url",
+          "id": "block_url",
+          "label": "URL slideshow",
+          "default": "/collections/all"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SLIDESHOW V4",
+      "category": "HOME",
+      "blocks": [
+        {
+          "type": "slideshow",
+          "settings": {
+            "sub_title": "TRENDING COLLECTION",
+            "title_slide": "Side Table Decor"
+          }
+        },
+        {
+          "type": "slideshow",
+          "settings": {
+            "sub_title": "BEST TRENDING",
+            "title_slide": "Beautiful Kids Room"
+          }
+        },
+        {
+          "type": "slideshow",
+          "settings": {
+            "sub_title": "DEROS FURNITURE",
+            "title_slide": "Bedroom collections"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

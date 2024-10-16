@@ -1,0 +1,704 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+{% for block in section.blocks %}
+{% if block.type == "slideshow" %}
+  {% if block.settings.fonts_subtitle !=blank %}
+  <link href="https://fonts.googleapis.com/css2?family={{block.settings.fonts_subtitle}}:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  {% endif %}
+  {% if block.settings.fonts_title !=blank %}
+  <link href="https://fonts.googleapis.com/css2?family={{block.settings.fonts_title}}:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  {% endif %}
+  {% if block.settings.fonts_button !=blank %}
+  <link href="https://fonts.googleapis.com/css2?family={{block.settings.fonts_button}}:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  {% endif %}
+{% endif %}
+{% endfor %}
+
+
+<div data-section-id="{{ section.id }}" data-section-type="section-slideshow-v1" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %} {% if section.settings.sections_layout == "dark" %}background: {{section.settings.sections_bg_color}};{% endif %}">
+  <div class="section-slideshow-v1">
+      <div class="js-slideshow-v1">       
+        {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+        {% if block.type == "slideshow" %}
+        <div class="itemv-slide-h1">
+          <div class="info-sideh1">
+            <div class="picture-slideshow">
+              {% if block.settings.bg_slider != blank %}
+              <img src="{{block.settings.bg_slider | img_url: "master"}}" alt="" class="img-fluid img_slideh4 img-main">
+              {% else %}
+              <img src="//via.placeholder.com/1920x850" alt="">
+              {% endif %}
+
+            </div>
+            <div class="box-content {% if block.settings.select_position_content == 'left' %}box-content-left {% elsif block.settings.select_position_content == 'center' %}box-content-center {% elsif block.settings.select_position_content == 'right' %} box-content-right{% endif %}">
+              {% if block.settings.block_subtitle and block.settings.block_title and block.settings.block_buton != blank %}
+              <div class="{% if block.settings.select_textalign_content == 'left' %}text-left{% elsif block.settings.select_textalign_content == 'center' %} text-center{% else %} text-right{% endif %} box-info box-info-{{block.id}}">
+                <div class="subtitle box-subtitle-{{block.id}} animated">
+                  {% if block.settings.block_subtitle != blank %}
+                  <p class="mb-0" style="color:{{block.settings.color_subtitle}};">{{block.settings.block_subtitle}}</p>
+                  {% endif %}
+                </div>
+                <div class="box-title box-title-{{block.id}} animated">
+                  <div class="block-title">
+                    {% if block.settings.block_title != blank %}
+                    <h2 style="color:{{block.settings.color_title}};">{{block.settings.block_title}}</h2>
+                    {% endif %}
+                  </div>
+                </div>
+                {% if block.settings.block_buton != blank %}
+                <div class="box-button btn-animation-{{block.id}} animated">
+                  <a  href="{{block.settings.block_url}}" class="button-main1 button-shop-{{section.id}}-{{block.id}}">
+                    {{ block.settings.block_buton }}
+                  </a>
+                </div>
+                {% endif %}
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+    </div>
+  </div>
+</div>
+<style>
+  .section-slideshow-v1 .slick-arrow svg {
+    fill: {{section.settings.color_arrows}};
+  }
+  {% for block in section.blocks %}
+  {% if block.type == 'slideshow' %}
+  .section-slideshow-v1 .info-sideh1 .box-button .button-shop-{{section.id}}-{{block.id}}{
+ 	color:{{block.settings.color_block_button}};
+    background:{{block.settings.bg_color_block_button}}
+  }
+  .section-slideshow-v1 .info-sideh1 .box-button .button-shop-{{section.id}}-{{block.id}}:hover{
+    background: {{block.settings.bg_color_block_button_hover}} !important;
+    color: {{block.settings.color_block_button_hover}} !important;
+  }
+
+  .section-slideshow-v1 .slick-active .info-sideh1 .box-info-{{block.id}} .box-subtitle-{{block.id}}{   
+    -webkit-animation-name: {{block.settings.effect_subtitle}};
+    animation-name:  {{block.settings.effect_subtitle}};
+  }
+
+  .section-slideshow-v1 .slick-active .info-sideh1 .box-info-{{block.id}} .box-title-{{block.id}}{    
+    -webkit-animation-name: {{block.settings.effect_title}};
+    animation-name:  {{block.settings.effect_title}}; 
+  }
+
+  .section-slideshow-v1 .slick-active .info-sideh1 .box-info-{{block.id}} .btn-animation-{{block.id}}{   
+    -webkit-animation-name: {{block.settings.effect_button}};
+    animation-name:  {{block.settings.effect_button}}; 
+  }
+
+  .section-slideshow-v1 .slick-active .info-sideh1 .box-info-{{block.id}} .box-subtitle-{{block.id}} p{   
+    color:{{block.settings.color_subtitle}};
+    {% if block.settings.fonts_subtitle != blank %}
+    font-family: '{{block.settings.fonts_subtitle}}';
+      {% endif %}
+  }
+  .section-slideshow-v1 .slick-active .info-sideh1 .box-info-{{block.id}} .box-title-{{block.id}} h2 {    
+    color:{{block.settings.color_block_title_top1}};
+    {% if block.settings.fonts_title != blank %}
+    font-family: '{{block.settings.fonts_title}}';
+    {% endif %}
+  }
+  .section-slideshow-v1 .slick-active .info-sideh1 .box-info-{{block.id}} .btn-animation-{{block.id}} .button-main1 {
+    {% if block.settings.fonts_button != blank %}
+    font-family: '{{block.settings.fonts_button}}';
+    {% endif %}
+  }
+
+
+  @media(min-width:1900px){
+    .section-slideshow-v1 .slick-active .info-sideh1 .box-info-{{block.id}} .box-subtitle-{{block.id}} p{   
+      font-size:{{block.settings.font_size_subtitle}}px;
+    }
+    .section-slideshow-v1 .slick-active .info-sideh1 .box-info-{{block.id}} .box-title-{{block.id}} h2{    
+      font-size:{{block.settings.font_size_title}}px;    
+      line-height: 95px;
+    }
+    .section-slideshow-v1 .slick-active .info-sideh1 .box-info-{{block.id}} .btn-animation-{{block.id}} .button-main1{   
+      font-size:{{block.settings.font_size_button}}px;
+    }
+  }
+  
+
+  {% endif %}
+  {% endfor %}
+</style>
+{% schema %}
+{
+  "name": "SLIDESHOW V1",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "color_arrows",
+      "label": "Color Arrows",
+      "default": "#fff"
+    },
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slideshow",
+      "name": "Slideshow",
+      "settings": [{
+          "type": "header",
+          "content": "Position Content"
+        },
+        {
+          "type": "select",
+          "id": "select_position_content",
+          "label": "Choose The Position Content",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "select",
+          "id": "select_textalign_content",
+          "label": "Text Align Content",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "left"
+        },
+		{
+          "type": "image_picker",
+          "id": "bg_slider",
+          "label": "Image slideshow",
+          "info": "1920 x 1100px recommended"
+        },
+		{
+          "type": "text",
+          "id": "block_subtitle",
+          "label": "Sub Title sideshow",
+          "default": "Hot Collection"
+        },
+		{
+           "type": "color",
+           "id": "color_subtitle",
+           "label": "Color Sub Title sideshow",
+           "default": "#000"
+        },
+		{
+          "type": "range",
+          "id": "font_size_subtitle",
+          "min": 15,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Font Size",
+          "default": 20
+        },
+		{
+          "type": "text",
+          "id": "fonts_subtitle",
+          "label": "Fonts Family"
+        },
+        {
+          "type": "select",
+          "id": "effect_subtitle",
+          "label": "Choose The Effect",
+          "options": [
+            {
+              "value": "bounce",
+              "label": "Bounce"
+            },
+            {
+              "value": "flash",
+              "label": "Flash"
+            },
+            {
+              "value": "pulse",
+              "label": "Pulse"
+            },
+            {
+              "value": "rubberBand",
+              "label": "Rubberband"
+            },
+            {
+              "value": "shake",
+              "label": "Shake"
+            },
+            {
+              "value": "swing",
+              "label": "Swing"
+            },
+            {
+              "value": "tada",
+              "label": "tada"
+            },
+            {
+              "value": "wobble",
+              "label": "Wobble"
+            },
+            {
+              "value": "jello",
+              "label": "Jello"
+            },
+            {
+              "value": "heartBeat",
+              "label": "HeartBeat"
+            },
+            {
+              "value": "bounceIn",
+              "label": "BounceIn"
+            },
+            {
+              "value": "bounceInDown",
+              "label": "Bounce In Down"
+            },
+            {
+              "value": "bounceInLeft",
+              "label": "Bounce In Left"
+            },
+            {
+              "value": "bounceInRight",
+              "label": "Bounce In Right"
+            },
+            {
+              "value": "fadeIn",
+              "label": "Fade In"
+            },
+            {
+              "value": "fadeInDown",
+              "label": "Fade In Down"
+            },
+            {
+              "value": "fadeInLeft",
+              "label": "Fade In Left"
+            },
+            {
+              "value": "fadeInRight",
+              "label": "Fade In Right"
+            },
+            {
+              "value": "fadeInUp",
+              "label": "Fade In Up"
+            },
+            {
+              "value": "flipInX",
+              "label": "Flip In X"
+            },
+            {
+              "value": "flipInY",
+              "label": "Flip In Y"
+            },
+            {
+              "value": "lightSpeedIn",
+              "label": "Light Speed In"
+            },
+            {
+              "value": "slideInUp",
+              "label": "Slide In Up"
+            },
+            {
+              "value": "slideInRight",
+              "label": "Slide In Right"
+            },
+            {
+              "value": "slideInDown",
+              "label": "Slide In Down"
+            },
+            {
+              "value": "slideInLeft",
+              "label": "Slide In Left"
+            },
+            {
+              "value": "zoomIn",
+              "label": "Zoom In"
+            }
+          ]
+        },
+		{
+          "type": "text",
+          "id": "block_title",
+          "label": "Title sideshow",
+          "default": "BackBag For Men"
+        },
+		{
+          "type": "range",
+          "id": "font_size_title",
+          "min": 15,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Font Size",
+          "default": 70
+        },
+		{
+          "type": "text",
+          "id": "fonts_title",
+          "label": "Fonts Family"
+        },
+        {
+          "type": "select",
+          "id": "effect_title",
+          "label": "Choose The Effect",
+          "options": [
+            {
+              "value": "bounce",
+              "label": "Bounce"
+            },
+            {
+              "value": "flash",
+              "label": "Flash"
+            },
+            {
+              "value": "pulse",
+              "label": "Pulse"
+            },
+            {
+              "value": "rubberBand",
+              "label": "Rubberband"
+            },
+            {
+              "value": "shake",
+              "label": "Shake"
+            },
+            {
+              "value": "swing",
+              "label": "Swing"
+            },
+            {
+              "value": "tada",
+              "label": "tada"
+            },
+            {
+              "value": "wobble",
+              "label": "Wobble"
+            },
+            {
+              "value": "jello",
+              "label": "Jello"
+            },
+            {
+              "value": "heartBeat",
+              "label": "HeartBeat"
+            },
+            {
+              "value": "bounceIn",
+              "label": "BounceIn"
+            },
+            {
+              "value": "bounceInDown",
+              "label": "Bounce In Down"
+            },
+            {
+              "value": "bounceInLeft",
+              "label": "Bounce In Left"
+            },
+            {
+              "value": "bounceInRight",
+              "label": "Bounce In Right"
+            },
+            {
+              "value": "fadeIn",
+              "label": "Fade In"
+            },
+            {
+              "value": "fadeInDown",
+              "label": "Fade In Down"
+            },
+            {
+              "value": "fadeInLeft",
+              "label": "Fade In Left"
+            },
+            {
+              "value": "fadeInRight",
+              "label": "Fade In Right"
+            },
+            {
+              "value": "fadeInUp",
+              "label": "Fade In Up"
+            },
+            {
+              "value": "flipInX",
+              "label": "Flip In X"
+            },
+            {
+              "value": "flipInY",
+              "label": "Flip In Y"
+            },
+            {
+              "value": "lightSpeedIn",
+              "label": "Light Speed In"
+            },
+            {
+              "value": "slideInUp",
+              "label": "Slide In Up"
+            },
+            {
+              "value": "slideInRight",
+              "label": "Slide In Right"
+            },
+            {
+              "value": "slideInDown",
+              "label": "Slide In Down"
+            },
+            {
+              "value": "slideInLeft",
+              "label": "Slide In Left"
+            },
+            {
+              "value": "zoomIn",
+              "label": "Zoom In"
+            }
+          ]
+        },
+		{
+           "type": "color",
+           "id": "color_title",
+           "label": "Color Title sideshow",
+           "default": "#ff9900"
+        },
+        {
+          "type": "text",
+          "id": "block_buton",
+          "label": "Button slideshow",
+          "default": "Shop now"
+        },
+        {
+          "type": "url",
+          "id": "block_url",
+          "label": "URL button slideshow",
+          "default": "/collections/all"
+        },
+		{
+          "type": "range",
+          "id": "font_size_button",
+          "min": 10,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "label": "Font Size",
+          "default": 14
+        },
+		{
+          "type": "text",
+          "id": "fonts_button",
+          "label": "Fonts Family"
+        },
+        {
+          "type": "select",
+          "id": "effect_button",
+          "label": "Choose The Effect",
+          "options": [
+            {
+              "value": "bounce",
+              "label": "Bounce"
+            },
+            {
+              "value": "flash",
+              "label": "Flash"
+            },
+            {
+              "value": "pulse",
+              "label": "Pulse"
+            },
+            {
+              "value": "rubberBand",
+              "label": "Rubberband"
+            },
+            {
+              "value": "shake",
+              "label": "Shake"
+            },
+            {
+              "value": "swing",
+              "label": "Swing"
+            },
+            {
+              "value": "tada",
+              "label": "tada"
+            },
+            {
+              "value": "wobble",
+              "label": "Wobble"
+            },
+            {
+              "value": "jello",
+              "label": "Jello"
+            },
+            {
+              "value": "heartBeat",
+              "label": "HeartBeat"
+            },
+            {
+              "value": "bounceIn",
+              "label": "BounceIn"
+            },
+            {
+              "value": "bounceInDown",
+              "label": "Bounce In Down"
+            },
+            {
+              "value": "bounceInLeft",
+              "label": "Bounce In Left"
+            },
+            {
+              "value": "bounceInRight",
+              "label": "Bounce In Right"
+            },
+            {
+              "value": "fadeIn",
+              "label": "Fade In"
+            },
+            {
+              "value": "fadeInDown",
+              "label": "Fade In Down"
+            },
+            {
+              "value": "fadeInLeft",
+              "label": "Fade In Left"
+            },
+            {
+              "value": "fadeInRight",
+              "label": "Fade In Right"
+            },
+            {
+              "value": "fadeInUp",
+              "label": "Fade In Up"
+            },
+            {
+              "value": "flipInX",
+              "label": "Flip In X"
+            },
+            {
+              "value": "flipInY",
+              "label": "Flip In Y"
+            },
+            {
+              "value": "lightSpeedIn",
+              "label": "Light Speed In"
+            },
+            {
+              "value": "slideInUp",
+              "label": "Slide In Up"
+            },
+            {
+              "value": "slideInRight",
+              "label": "Slide In Right"
+            },
+            {
+              "value": "slideInDown",
+              "label": "Slide In Down"
+            },
+            {
+              "value": "slideInLeft",
+              "label": "Slide In Left"
+            },
+            {
+              "value": "zoomIn",
+              "label": "Zoom In"
+            }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Background Color Button"
+        },
+		{
+           "type": "color",
+           "id": "color_block_button",
+           "label": "Color button",
+           "default": "#fff"
+        },
+		{
+           "type": "color",
+           "id": "bg_color_block_button",
+           "label": "Color button",
+           "default": "#000"
+        },
+		{
+           "type": "color",
+           "id": "color_block_button_hover",
+           "label": "Color button hover",
+           "default": "#fff"
+        },
+		{
+           "type": "color",
+           "id": "bg_color_block_button_hover",
+           "label": "Color button hover",
+           "default": "#ff7473"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SLIDESHOW V1",
+      "category": "HOME",
+	  "blocks": [
+        {
+          "type": "slideshow",
+          "settings": {
+            "block_subtitle": "Hot Collection",
+            "block_title": "BackBag For Men",
+			"block_buton": "Shop now"
+          }
+        },
+		 {
+          "type": "slideshow",
+          "settings": {
+            "block_subtitle": "Clean & Elegant",
+            "block_title": "Modern HandBag",
+			"block_buton": "Shop now"
+          }
+        }	
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

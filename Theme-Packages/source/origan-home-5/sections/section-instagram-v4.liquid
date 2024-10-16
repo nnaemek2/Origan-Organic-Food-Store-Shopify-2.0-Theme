@@ -1,0 +1,211 @@
+<div data-section-id="{{ section.id }}" data-section-type="section-instagram-v4" style="{% if section.settings.margin_top != blank %}margin-top: {{section.settings.margin_top}}px;{%endif%} {% if section.settings.margin_bottom != blank %}margin-bottom: {{section.settings.margin_bottom}}px;{% endif %}">
+  <div class="section-instagram-v4">
+    <div class="container-fluid"> 
+      {% assign instafeed_img = '{{image}}' %}
+      {% assign instafeed_link = '{{link}}' %} 
+
+      {% if section.settings.ins_userid != blank and section.settings.ins_access_token != blank %}
+      <script> 
+        jQuery(document).ready(function($) {
+          var feed = new Instafeed({
+            get: 'user',
+            userId: '{{section.settings.ins_userid}}',
+            accessToken: '{{section.settings.ins_access_token}}',
+            template: '<div class="padding-slick"> <div class="content box-img1"> <a href="{{instafeed_link}}" class="delay03 inline-block" ><img src="{{instafeed_img}}" class="img-fluid">  </div> </a></div>',
+            target: 'engoj_section_instagram_v1',
+            resolution: 'standard_resolution',
+            limit: '{{section.settings.ins_limit_number}}',
+            after: engo_insv1
+          });
+          feed.run();
+
+          function engo_insv4() {
+            $('.js-instagram-v4').slick({
+              arrows: false,
+              dots: false,
+              infinite: false,
+              autoplay: true,
+              slidesToShow: 6,
+              slidesToScroll: 1,
+              prevArrow: '<button type="button" class="slick-brand-prev fa fa-angle-left"></button>',
+              nextArrow: '<button type="button" class="slick-brand-next fa fa-angle-right"></button>',
+              responsive: [
+                {
+                  breakpoint: 1200,
+                  settings: {
+                    slidesToShow: 4
+                  }
+                },
+                {
+                  breakpoint: 992,
+                  settings: {
+                    slidesToShow: 3
+                  }
+                },
+                {
+                  breakpoint: 600,
+                  settings: {
+                    slidesToShow: 2
+                  }
+                }
+              ]
+            });
+          }
+        });
+      </script>
+      {% else %}
+      <script>
+        jQuery(document).ready(function($) {
+          function engo_insv4() {
+            $('.js-instagram-v4').slick({
+              arrows: false,
+              dots: false,
+              infinite: false,
+              autoplay: true,
+              slidesToShow: 6,
+              slidesToScroll: 1,
+              prevArrow: '<button type="button" class="slick-brand-prev fa fa-angle-left"></button>',
+              nextArrow: '<button type="button" class="slick-brand-next fa fa-angle-right"></button>',
+              responsive: [
+                {
+                  breakpoint: 1200,
+                  settings: {
+                    slidesToShow: 4
+                  }
+                },
+                {
+                  breakpoint: 992,
+                  settings: {
+                    slidesToShow: 3
+                  }
+                },
+                {
+                  breakpoint: 600,
+                  settings: {
+                    slidesToShow: 2
+                  }
+                }
+              ]
+            });
+          }
+          engo_insv4();
+        });
+      </script>
+      {% endif %}
+
+      <div class="instagram_h1">
+        <div class="text-center text_top">
+
+          {% if section.settings.title_content != blank %}
+          <h2 class="title_insta">{{section.settings.title_content}}</h2>
+          {% endif %}
+        </div>
+        <div class="instagram-content">
+          <div class="instagram-subtitle">
+            {% if section.settings.subtitle != blank %}
+            <h3 class="subtitle_insta text-center mb-0">
+              <i class="fa fa-instagram" aria-hidden="true"></i>
+              {{section.settings.subtitle}}</h3>
+            {% endif %}
+          </div>
+
+          <div class="row js-instagram-v4 list-intagram" id="engoj_section_instagram_v1">  
+
+            {% if section.settings.ins_userid == blank or section.settings.ins_access_token == blank %}
+            {% if shop.permanent_domain == "origan-store-demo.myshopify.com" %}
+            {% for i in (1..section.settings.ins_limit_number) %}
+            <div class="padding-slick">
+              <div class="content box-img1">
+                <a href="https://www.instagram.com/" class="delay03 inline-block" >
+                  <img src="{{ 'instagram' | append: i | append: '.jpg' | file_img_url: 'master' }}" class="img-fluid" alt="instagram" />
+                </a>
+              </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="padding-slick">
+              <div class="content box-img1">
+
+                <a href="https://www.instagram.com/" class="delay03 inline-block" >  {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}</a>
+
+              </div>
+            </div>
+            {% endif %}
+            {% endif %}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "INSTAGRAM V4",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Instagram title"
+    },
+    {
+      "type": "text",
+      "id": "title_content",
+      "label": "Title",
+      "default": "Shop INSTAGRAM"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Sub title",
+      "default": "@ceramin on instagram."
+    },
+    {
+      "type": "text",
+      "id": "ins_userid",
+      "label": "User ID Instagram",
+      "default": "3672948962"
+    },
+    {
+      "type": "text",
+      "id": "ins_access_token",
+      "label": "Access Token Instagram",
+      "default": "3672948962.0f64772.430edb7f711e4665b59777c54d1ed9ce"
+    },
+    {
+      "type": "text",
+      "id": "ins_limit_number",
+      "label": "Limit Image",
+      "default": "6"
+    },
+    {
+      "type": "header",
+      "content": "Section Space"
+    },
+    {
+      "type": "text",
+      "id": "margin_top",
+      "label": "Margin Top",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    },
+    {
+      "type": "text",
+      "id": "margin_bottom",
+      "label": "Margin Bottom",
+      "info": "Defined in pixels. Do not add the 'px' unit."
+    }
+  ],
+  "presets": [
+    {
+      "name": "INSTAGRAM V4",
+      "category": "HOME"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+

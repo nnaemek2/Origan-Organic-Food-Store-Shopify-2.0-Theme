@@ -1,0 +1,52 @@
+<div class="product-item-v2 product-item">
+  <div class="product row align-items-center">
+    <div class="col-md-4 col-5 product-thumb">
+      <a href="/admin/products">
+        <img style="width: 100%" src="//via.placeholder.com/960x997" class="img-responsive">
+      </a>
+    </div>
+    <div class="col-md-4 col-5">
+      <div class="info-product">
+        <h3 class="title-product d-flex">
+          <a href="/admin/products">Example Product</a>
+        </h3>
+        <p class="price-product mb-0">
+          <s class="price-old">$160.00</s>
+          <span class="price">$80.00</span>
+        </p>
+        <span class="engoc-star star-5"></span>
+      </div>
+    </div>
+    <div class="product-icon-action">
+      <div class="add-wishlist">
+        <a href="javascript:void(0)" class="box-shadow icon-heart inline-block maxus-product__wishlist added wish text-center" >
+          {% if settings.pia_wishlist_svg != blank %}
+          {{settings.pia_wishlist_svg}}  
+          {% else %}
+          <i class="{{settings.pia_wishlist}}"></i>
+          {% endif %}
+        </a>
+      </div>
+
+      <div class="add-to-cart">
+        <button type="submit" class="">
+          {% if settings.pia_addcart_svg != blank %}
+          {{settings.pia_addcart_svg}}
+          {% else %}
+          <i class="{{settings.pia_addcart}}"></i>
+          {% endif %}
+        </button>
+      </div>
+
+      <div class="quick-view">
+        <a href="javascript:void(0)" class="engoj_btn_quickview icon-quickview inline-block box-shadow">
+          {% if settings.pia_quickview_svg != blank %}
+          {{settings.pia_quickview_svg}}
+          {% else %}
+          <i class="{{settings.pia_quickview}}"></i>
+          {% endif %}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
